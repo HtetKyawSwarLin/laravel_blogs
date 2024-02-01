@@ -15,7 +15,7 @@
             <x-form.input name='slug' value="{{ $blog->slug }}" />
             <x-form.input name='intro' value="{{ $blog->intro }}" />
             <x-form.input name='thumbnail' type='file' />
-            <img src="/storage/thumbnails/{{ $blog->thumbnail }}" width="200px" height="150px" alt="">
+            <img src="/storage/{{ $blog->thumbnail }}" width="200px" height="150px" alt="">
             <x-form.textarea name='body' value="{{ $blog->body }}" />
 
             <x-form.input-form-wrapper>
