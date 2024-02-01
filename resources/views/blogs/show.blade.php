@@ -5,9 +5,9 @@
     </x-slot>
     <div class="container mt-5">
         <div class="row">
-        <div class="col-md-6 mx-auto text-center">
-                <img src='{{asset("storage/$blog->thumbnail")}}'
-                    class="card-img-top img-thumbnail" style="height: 400px;" alt="..." />
+            <div class="col-md-6 mx-auto text-center">
+                <img src='{{ asset("storage/$blog->thumbnail") }}' class="card-img-top img-thumbnail"
+                    style="height: 400px;" alt="..." />
                 <h3 class="my-3">{{ $blog->title }} </h3>
                 <div>
                     <div><a class="text-black text-decoration-none" href="/users/{{ $blog->author->username }} ">Author -
@@ -18,18 +18,20 @@
                     <div>{{ $blog->created_at->format('F Y h:i:s A') }} </div>
 
                 </div>
-                <div>
-                    <form action="/blogs/{{$blog->slug}}/subscription" method="POST">
-                        @csrf
-                        @auth
-                            @if (auth()->user()->isSubscribed($blog))
-                                <button class="btn btn-outline-danger my-2">UnSubscribe</button>
-                            @else
-                                 <button class="btn btn-outline-warning my-2">Subscribe</button>
-                            @endif
-                        @endauth
-                    </form>
-                </div>
+                @if (Auth::user()->id !== $blog->author->id)
+                    <div>
+                        <form action="/blogs/{{ $blog->slug }}/subscription" method="POST">
+                            @csrf
+                            @auth
+                                @if (auth()->user()->isSubscribed($blog))
+                                    <button class="btn btn-outline-danger my-2">UnSubscribe</button>
+                                @else
+                                    <button class="btn btn-outline-warning my-2">Subscribe</button>
+                                @endif
+                            @endauth
+                        </form>
+                    </div>
+                @endif
                 <p class="lh-md mt-3">
                     {!! $blog->body !!}
                 </p>

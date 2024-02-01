@@ -17,28 +17,32 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($blogs as $blog)
-                    @if ($blog->author->id === Auth::user()->id)
-                        <tr>
-                            <td> <a href="/blogs/{{ $blog->slug }}" target="_blank">{{ $blog->title }}</a> </td>
-                            <td>{{ $blog->intro }} </td>
-                            <td><a href="/admin/blogs/{{ $blog->slug }}/edit" class="btn btn-success">Edit</a></td>
-                            <td>
-                                <form action="/admin/blogs/{{ $blog->slug }}/delete" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @else
-                        <tr>
-                            <td colspan="4">
-                                <h3 class=" text-danger text-center">No Blogs Created</h3>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
+                @if ($blogs)
+                    @foreach ($blogs as $blog)
+                        @if ($blog->author->id === Auth::user()->id)
+                            <tr>
+                                <td> <a href="/blogs/{{ $blog->slug }}" target="_blank">{{ $blog->title }}</a> </td>
+                                <td>{{ $blog->intro }} </td>
+                                <td><a href="/admin/blogs/{{ $blog->slug }}/edit" class="btn btn-success">Edit</a></td>
+                                <td>
+                                    <form action="/admin/blogs/{{ $blog->slug }}/delete" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                @else
+                    <td colspan="4">
+                        <h3 class=" text-danger text-center">No Blogs Created</h3>
+                    </td>
+                    </tr>
+                @endif
+
+                <tr>
+
             </tbody>
         </table>
 

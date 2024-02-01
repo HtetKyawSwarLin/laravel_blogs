@@ -1,18 +1,15 @@
 <x-layout>
 
     <x-slot name="title">
-        <title>Creative Coder</title>
+        <title>Blogify</title>
     </x-slot>
-        @if (session('success'))
+    @if (session('success'))
         <div class="alert alert-success text-center">
-            {{session('success')}}
+            {{ session('success') }}
         </div>
-        @endif
-    <x-hero/>
+    @endif
+    <x-hero />
 
-    <x-blog-section :blogs="$blogs"/>
+    <x-blog-section :blogs="$blogs" />
 
 </x-layout>
-
-
-
